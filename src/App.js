@@ -4,7 +4,7 @@ import './App.css';
 import Player from './components/Player.jsx';
 
 //declared globally to allow access throughout scope
-const socket = io(process.env.REACT_APP_BASE_URL);
+const socket = io.connect(process.env.REACT_APP_SOCKETIO_URL);
 
 class App extends Component {
   constructor(props) {
