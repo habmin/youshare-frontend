@@ -53,7 +53,6 @@ class Vote extends Component {
                         ? false
                         : true
                     }
-                    inverted 
                     color="red" 
                     type="button" 
                     id="thumbs-down" 

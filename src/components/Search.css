@@ -1,0 +1,35 @@
+#search-container {
+    width: 400px;
+    margin: 15px;
+    padding: 5px;
+
+}
+
+#search-results {
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: auto;
+    height: 572px;
+}
+
+.search-item-contents {
+    margin: 5px 0 0 0;
+    color: #FCFFFF;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: rgb(49, 49, 49);
+    transition: 0.3s;
+}
+
+.search-item-contents *{
+    margin: 0;
+    padding: 0;
+}
+
+.search-item-contents:hover {
+    border-color: #FF5144;
+}

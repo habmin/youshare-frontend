@@ -3,7 +3,7 @@ import Search from './Search.jsx';
 import Vote from './Vote.jsx';
 import YouTube from 'react-youtube';
 import './Player.css';
-import { Button }from 'semantic-ui-react';
+import { Button, List }from 'semantic-ui-react';
 
 class Player extends Component {
     constructor(props) {
@@ -206,7 +206,7 @@ class Player extends Component {
         };
         
         return (
-            <div className="player">
+            <div id="player">
                 <div className="video">
                     <YouTube
                         id="YouTube-Video"
@@ -248,23 +248,26 @@ class Player extends Component {
                         : <></>
                     }
                 </div>
-                <div className="video-lists">
-                    <div className="queue">
-                        <ol>
+                <div id="video-lists">
+                    <div id="queue">
+                        <h4 id="playlist-title">Playlist</h4>
+                        <List inverted>
                             {
                                 this.state.queue.map((item) => {
                                     return (
-                                        <div className="queue-item" id={item.video.id.videoId}>
-                                            <li>
-                                                <img src={item.video.snippet.thumbnails.default.url} />
-                                                <p>{item.video.snippet.title}</p>
-                                                <p>from {item.username}</p>
-                                            </li>
+                                        <div className="queue-item">
+                                            <List.Item id={item.video.id.videoId}>
+                                                <div className="queue-item-contents">
+                                                    <img src={item.video.snippet.thumbnails.default.url} />
+                                                    <p>{this.state.queue.indexOf(item) + 1}. {item.video.snippet.title}</p>
+                                                    <p>Added by {item.username}</p>
+                                                </div>
+                                            </List.Item>
                                         </div>
                                     );
                                 })
                             }
-                        </ol>
+                        </List>
                     </div>
                     <Search addToQueue={this.broadcastToQueue}/>
                 </div>
