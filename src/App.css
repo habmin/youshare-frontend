@@ -1,0 +1,44 @@
+body {
+    background-color: #181818;
+    text-align: center;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sign-in {
+    margin: 20px 5px 5px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    max-width: 550px;
+    border: 10px;
+    background-color: #181818;
+    color: #FCFFFF;
+}
+
+#main-title {
+    color: #FCFFFF;
+}
+
+.sub-title {
+    color: #AAAAAA;
+}
+
+.input-field {
+    background-color: #181818;
+    border: 1px;
+    color:#FCFFFF;
+    width: 100%;
+    padding: 0 0 10px 0;
+    margin: 0 0 10px 0 ;
+}
+
+.input-text {
+    color: #FCFFFF;
+    margin: 0px;
+}

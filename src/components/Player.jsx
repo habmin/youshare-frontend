@@ -107,22 +107,23 @@ class Player extends Component {
     }
 
     broadcastToQueue = (result) => {
-        this.props.socket.emit('add-playlist', {
-            username: this.props.username,
-            room: this.props.room, 
-            video: result}
-        );
+        console.log(result);
         try{
-            fetch(process.env.REACT_APP_DB_URL + '/api/sessions/', + this.props.room, {
+            fetch(process.env.REACT_APP_DB_URL + '/api/sessions/' + this.props.room, {
                 method: 'PUT',
                 body: JSON.stringify({
+                    username: this.props.username,
                     video: result
                 }),
                 headers: {'Content-Type': 'application/json'}
             }).then((res) => {
                 return res.json();
             }).then((data) => {
-                console.log(data);
+                this.props.socket.emit('add-playlist', {
+                    username: this.props.username,
+                    room: this.props.room, 
+                    video: result}
+                );
             }).catch((err) => {console.error({'Error': err})});
         } catch(err){ console.log(err) }
     }
@@ -226,6 +227,11 @@ class Player extends Component {
                     />
                     {
                         currentVideoID
+                        ? <h3 className="video-title">{this.state.queue[0].video.snippet.title}</h3>
+                        : <></>
+                    }
+                    {
+                        currentVideoID
                         ? <button type="button" onClick={this.playPause}>Play/Pause</button>
                         : <></>
                     }
@@ -240,24 +246,26 @@ class Player extends Component {
                         : <></>
                     }
                 </div>
-                <div className="queue">
-                    <ol>
-                        {
-                            this.state.queue.map((item) => {
-                                return (
-                                    <div className="queue-item" id={item.video.id.videoId}>
-                                        <li>
-                                            <img src={item.video.snippet.thumbnails.default.url} />
-                                            <p>{item.video.snippet.title}</p>
-                                            <p>from {item.username}</p>
-                                        </li>
-                                    </div>
-                                );
-                            })
-                        }
-                    </ol>
+                <div className="video-lists">
+                    <div className="queue">
+                        <ol>
+                            {
+                                this.state.queue.map((item) => {
+                                    return (
+                                        <div className="queue-item" id={item.video.id.videoId}>
+                                            <li>
+                                                <img src={item.video.snippet.thumbnails.default.url} />
+                                                <p>{item.video.snippet.title}</p>
+                                                <p>from {item.username}</p>
+                                            </li>
+                                        </div>
+                                    );
+                                })
+                            }
+                        </ol>
+                    </div>
+                    <Search addToQueue={this.broadcastToQueue}/>
                 </div>
-                <Search addToQueue={this.broadcastToQueue}/>
             </div>
         );
     }

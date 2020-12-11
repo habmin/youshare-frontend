@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Input, Button }from 'semantic-ui-react';
 //import io from 'socket.io-client';
 //import { BrowserRouter as Router, Route, Link, Switch, } from 'react-router-dom';
 
@@ -33,8 +34,7 @@ class Search extends Component {
         return (
             <div className="playlist">
                 <div className="search">
-                    <input type="text" name="query" onChange={this.handleChange} placeholder="Search For Videos" />
-                    <button type="button" onClick={this.searchResults}>Search YouTube</button>
+                    <Input action={{color: "inverted red", icon: 'search', onClick: this.searchResults }}type="text" name="query" onChange={this.handleChange} placeholder="Search For Videos" />
                 </div>
                 <div className="search-results"></div>
                     <ul>

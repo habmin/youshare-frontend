@@ -4,6 +4,19 @@ on their own. This makes it far easier to manage the
 play/pause state to sync with other users and 
 infinite loops. */
 
+.video {
+    border-style: solid;
+    border-radius: 5px;
+    border-color: rgb(49, 49, 49);
+    transition: 0.3s;
+}
+
+.video:hover {
+    border-color: #FF5144;
+}
+
 #YouTube-Video {
+    margin: 20px;
     pointer-events: none;
+
 }
