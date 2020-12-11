@@ -9,6 +9,7 @@ infinite loops. */
     border-radius: 5px;
     border-color: rgb(49, 49, 49);
     transition: 0.3s;
+    padding: 15px;
 }
 
 .video:hover {
@@ -16,7 +17,19 @@ infinite loops. */
 }
 
 #YouTube-Video {
-    margin: 20px;
+    margin: 20px 20px 0px 20px;
     pointer-events: none;
 
+}
+
+.video-title {
+    color: #FCFFFF;
+    text-align: left;
+    padding: 2px;
+    margin: 0px 20px 15px 20px;
+}
+
+#play-pause{
+    padding: 30px;
+    margin: 20px 0 0 0;
 }

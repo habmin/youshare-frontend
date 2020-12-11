@@ -51,7 +51,10 @@ class App extends Component {
             this.state.enteredRoom
             ? 
               <div className="room">
-                <p>connected users: {this.state.currentUsers.length}</p>
+                <div id="room-stats">
+                  <p>Room name: {this.state.room}</p>
+                  <p>Connected users: {this.state.currentUsers.length}</p>
+                </div>
                 <Player 
                   username={this.state.username}
                   sessionID = {this.state.sessionID} 
@@ -65,8 +68,10 @@ class App extends Component {
               <div id="sign-in">
                 <h3 className="sub-title">Make playlists and watch videos with friends near and far.</h3>
                 <h3 className="sub-title">Everyone gets to vote (by simple majority) if they want to continue to watch the video or not </h3>
-                <p className="input-text">Enter a display name:</p>
-                <Input
+                <div className="input-form">
+                  <p className="input-text">Enter a display name:</p>
+                  <Input
+                    size="big"
                     className="input-field"
                     type="text" 
                     name="username" 
@@ -74,8 +79,9 @@ class App extends Component {
                     onChange={this.handleChange} 
                     required 
                   />
-                <p className="input-text">Type in a room name. If it doesn't exist, a new one will be created</p>
-                <Input
+                  <p className="input-text">Type in a room name. If it doesn't exist, a new one will be created</p>
+                  <Input
+                    size="big"
                     className="input-field"
                     type="text" 
                     name="room" 
@@ -83,7 +89,11 @@ class App extends Component {
                     onChange={this.handleChange} 
                     required 
                   />
-                <Button inverted color="red" onClick={this.joinRoom}>Join A Room</Button>
+                  <Button 
+                    inverted color="red"
+                    size="massive" 
+                    onClick={this.joinRoom}>Join A Room</Button>
+                </div>
               </div>
           }
         </div>

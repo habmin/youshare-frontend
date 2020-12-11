@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button }from 'semantic-ui-react';
+import './Vote.css';
 
 class Vote extends Component {
     constructor(props) {
@@ -32,8 +34,31 @@ class Vote extends Component {
     render() {
         return (
             <div className="vote-bar">
-                <button type="button" id="thumbs-up" onClick={this.voteButton}>👍</button>
-                <button type="button" id="thumbs-down" onClick={this.voteButton}>👎</button>
+                <Button 
+                    fluid
+                    inverted={
+                        this.props.hasVoted === 'thumbs-up'
+                        ? false
+                        : true
+                    }
+                    color="green" 
+                    type="button" 
+                    id="thumbs-up" 
+                    icon={{name: "thumbs up outline", size: "big"}} 
+                    onClick={this.voteButton} />
+                <Button 
+                    fluid 
+                    inverted={
+                        this.props.hasVoted === 'thumbs-down'
+                        ? false
+                        : true
+                    }
+                    inverted 
+                    color="red" 
+                    type="button" 
+                    id="thumbs-down" 
+                    icon={{name: "thumbs down outline", size: "big"}} 
+                    onClick={this.voteButton} />
             </div>
         )
     }

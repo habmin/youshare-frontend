@@ -3,6 +3,7 @@ import Search from './Search.jsx';
 import Vote from './Vote.jsx';
 import YouTube from 'react-youtube';
 import './Player.css';
+import { Button }from 'semantic-ui-react';
 
 class Player extends Component {
     constructor(props) {
@@ -223,17 +224,27 @@ class Player extends Component {
                     }
                     {
                         currentVideoID
-                        ? <button type="button" onClick={this.playPause}>Play/Pause</button>
-                        : <></>
-                    }
-                    {
-                        currentVideoID
-                        ? <Vote 
+                        ? <Vote
                             room={this.props.room}
                             nextVideo={this.nextVideo}
                             hasVoted={this.state.hasVoted}
                             changeHasVoted={this.changeHasVoted}
                             socket={this.props.socket}/>
+                        : <></>
+                    }
+                    {
+                        currentVideoID
+                        ? <Button
+                            id="play-pause" 
+                            circular
+                            icon={
+                                this.state.playerState === 1
+                                ? {name: "pause", size: "big"}
+                                : {name: "play", size: "big"}
+                            } 
+                            inverted color="black" 
+                            type="button" 
+                            onClick={this.playPause} />
                         : <></>
                     }
                 </div>

@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 body {
     background-color: #181818;
     text-align: center;
+    font-family: 'Roboto', sans-serif;
 }
 
 .App {
@@ -9,8 +12,15 @@ body {
     align-items: center;
 }
 
+#room-stats {
+    display: flex;
+    justify-content: space-evenly;
+    color: #AAAAAA;
+}
+
 #sign-in {
-    margin: 20px 5px 5px 5px;
+    margin: 20px 0px 0px 0px;
+    padding: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,11 +31,19 @@ body {
     color: #FCFFFF;
 }
 
+.input-form {
+    margin: 20px 0 0 0;
+}
+
 #main-title {
+    font-size: 50px;
     color: #FCFFFF;
 }
 
 .sub-title {
+    font-size: 25px;
+    padding: 0px;
+    margin: 7px 0 7px 0;
     color: #AAAAAA;
 }
 
@@ -39,6 +57,7 @@ body {
 }
 
 .input-text {
+    font-size: 15px;
     color: #FCFFFF;
     margin: 0px;
 }
