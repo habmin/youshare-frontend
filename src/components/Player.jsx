@@ -44,7 +44,7 @@ class Player extends Component {
                     })
                 }
                 if (result.status.code === 404) {
-                    fetch(process.env.REACT_APP_DB_URL + '/api/sessions/', {
+                    fetch(process.env.REACT_APP_DB_URL + '/api/sessions', {
                         method: 'POST',
                         body: JSON.stringify({
                             room_name: this.props.room,
