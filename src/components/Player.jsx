@@ -146,18 +146,11 @@ class Player extends Component {
             }).catch((err) => {console.error({'Error': err})});
         } catch(err){ console.log(err) }
         if (queueBuffer.length) {
-            console.log(queueBuffer[0].video)
-            this.props.socket.emit('current-video', {
-                video: queueBuffer[0].video.id.videoId,
-                room: this.props.room
-            });
+            console.log(queueBuffer[0].video);
+            this.youTubeElem.playVideo();
         }
         else {
             this.youTubeElem.stopVideo();
-            this.props.socket.emit('current-video', {
-                video: {},
-                room: this.props.room
-            });
         }
         console.log("finished nextVideo()");
     }
