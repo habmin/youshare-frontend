@@ -21,7 +21,6 @@ class Vote extends Component {
         this.props.socket.off('voting')
     }
     voteButton = (event) => {
-        console.log(this.props.hasVoted);
         if (this.props.hasVoted !== event.target.id) {
             if (this.props.hasVoted === 'thumbs-down')
                 this.props.socket.emit('voting', {room: this.props.room, negativeVotes: -1});

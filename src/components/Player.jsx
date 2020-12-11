@@ -34,6 +34,7 @@ class Player extends Component {
         //see if a saved playlist is there and load it into the queue
         //if no room is found, create it.
         try{
+            console.log(process.env.REACT_APP_DB_URL + '/api/sessions/' + this.props.room);
             fetch(process.env.REACT_APP_DB_URL + '/api/sessions/' + this.props.room).then((res) => {
                 return res.json();
             }).then((result) => {
@@ -63,18 +64,15 @@ class Player extends Component {
 
         //Listener for playlists added by all users via socket.io
         this.props.socket.on('add-playlist', (res) => {
-            console.log("receiving video to queue");
             let queueBuffer = [...this.state.queue];
             queueBuffer.push(res);
             this.setState({
                 queue: queueBuffer
             });
-            console.log("finished receiving video to queue");
         });
 
         //listener for when video are paused or not
         this.props.socket.on('player-state', (res) => {
-            console.log(res);
             if (res.playerState === 1)
                 this.youTubeElem.playVideo();
             else if (res.playerState === 2)
@@ -88,15 +86,12 @@ class Player extends Component {
 
         //listener for next video trigger
         this.props.socket.on('next-video', (res) => {
-            console.log("received next-video from socketio");
             if (res)
                 this.nextVideo();
-            console.log("finished next-video from socketio");
         })
 
         //listener for force next video trigger
         this.props.socket.on('force-next-video', (res) => {
-            console.log('A User Have Reached An Error ' + res.error)
             if (res)
                 this.onEnd();
         })
@@ -147,13 +142,11 @@ class Player extends Component {
             }).catch((err) => {console.error({'Error': err})});
         } catch(err){ console.log(err) }
         if (queueBuffer.length) {
-            console.log(queueBuffer[0].video);
             this.youTubeElem.playVideo();
         }
         else {
             this.youTubeElem.stopVideo();
         }
-        console.log("finished nextVideo()");
     }
 
     changeHasVoted = (vote) => {
@@ -163,9 +156,7 @@ class Player extends Component {
     };
 
     onEnd = () => {
-        console.log("onEnd() begins - send to socket io");
         this.props.socket.emit('next-video', {room: this.props.room});
-        console.log("onEnd() ends");
     }
     
     onError = (event) => {
@@ -190,7 +181,6 @@ class Player extends Component {
     onStateChange = (event) => {
         if (this.state.playerState === 3 && event.target.getPlayerState() === 1) 
             this.props.socket.emit('buffer-states', {room: this.props.room, error: false})
-        console.log(event.target.getPlayerState());
         this.setState({
             playerState: event.target.getPlayerState()
         });
