@@ -107,7 +107,6 @@ class Player extends Component {
     }
 
     broadcastToQueue = (result) => {
-        console.log(result);
         try{
             fetch(process.env.REACT_APP_DB_URL + '/api/sessions/' + this.props.room, {
                 method: 'PUT',
@@ -138,7 +137,7 @@ class Player extends Component {
             hasVoted: ''
         });
         try{
-            fetch(process.env.REACT_APP_DB_URL + '/api/sessions/', + this.props.room + '/nextVideo', {
+            fetch(process.env.REACT_APP_DB_URL + '/api/sessions/' + this.props.room + '/nextVideo', {
                 method: 'DELETE'
             }).then((res) => {
                 return res.json();
@@ -147,7 +146,6 @@ class Player extends Component {
             }).catch((err) => {console.error({'Error': err})});
         } catch(err){ console.log(err) }
         if (queueBuffer.length) {
-            // this.youTubeElem.playVideo();
             console.log(queueBuffer[0].video)
             this.props.socket.emit('current-video', {
                 video: queueBuffer[0].video.id.videoId,
