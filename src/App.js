@@ -19,6 +19,14 @@ class App extends Component {
     }
   }
   
+  componentDidMount() {
+    fetch(process.env.REACT_APP_DB_URL + '/api/sessions/' + this.props.room).then((res) => {
+      return res.json();
+      }).then((result) => {
+        console.log(result)
+      }).catch(err => console.log(err))
+    }
+
   handleChange = (event) =>
   this.setState({
     [event.target.name]: event.target.value
