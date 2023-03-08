@@ -34,28 +34,22 @@ class Player extends Component {
         //see if a saved playlist is there and load it into the queue
         //if no room is found, create it.
         try{
-            console.log(process.env.REACT_APP_DB_URL + '/api/sessions/' + this.props.room);
-            fetch(process.env.REACT_APP_DB_URL + '/api/sessions/' + this.props.room).then((res) => {
+            fetch(process.env.REACT_APP_DB_URL + '/api/sessions/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    room_name: this.props.room,
+                    playlist: []
+                }),
+                headers: {'Content-Type': 'application/json'}
+            }).then((res) => {
+                console.log(res)
                 return res.json();
-            }).then((result) => {
-                if (result.status.code === 200) {
+            }).then((data) => {
+                // room already existed, retrieve queue
+                if (data.status.code === 200) {
                     this.setState({
-                        queue: result.data.playlist
-                    })
-                }
-                if (result.status.code === 404) {
-                    fetch(process.env.REACT_APP_DB_URL + '/api/sessions', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            room_name: this.props.room,
-                            playlist: []
-                        }),
-                        headers: {'Content-Type': 'application/json'}
-                    }).then((res) => {
-                        return res.json();
-                    }).then((data) => {
-                        console.log(data);
-                    }).catch((err) => {console.error({'Error': err})});
+                        queue: data.data.playlist
+                    });
                 }
             }).catch((err) => {console.error({'Error': err})});
         } catch(err) {
@@ -98,8 +92,9 @@ class Player extends Component {
     }
 
     onReady = (event) => {
+        console.log("on ready")
         this.youTubeElem = event.target;
-        this.youTubeElem.stopVideo();
+        // this.youTubeElem.stopVideo();
     }
 
     broadcastToQueue = (result) => {
@@ -165,6 +160,7 @@ class Player extends Component {
     }
     
     playPause = () => {
+        console.log(this.state.playerState)
         if (this.state.playerState === 1)
             this.props.socket.emit('player-state', {
                 playerState: 2,
